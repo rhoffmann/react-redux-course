@@ -13,20 +13,27 @@ class SearchBar extends Component {
     this.state = {
       term: ''
     };
+
+    this._onTermChange = this._onTermChange.bind(this);
+  }
+
+  _onTermChange() {
+    const newTerm = this._input.value;
+    this.setState({ term: newTerm });
+    this.props.onSearchTermChange(newTerm);
   }
 
   render() {
     return (
-      <div ref='piff'>
+      <div className='search-bar' ref='searchBar'>
         <input
           ref={component => this._input = component}
           value={this.state.term}
-          onChange={() => this.setState({ term: this._input.value })}
+          onChange={this._onTermChange}
           className="form-control"
           placeholder={this.props.placeholder}
           type="text"
         />
-        <h3>Term:{this.state.term}</h3>
       </div>
     );
   }

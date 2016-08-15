@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import VideoListItem from './VideoListItem';
 
-const listItems = ["1", "2", "3"];
-
-const VideoList = () => {
+const VideoList = ({ videos, onVideoSelect, selectedVideo }) => {
   return (
-    <div>
+    <div className='col-md-4'>
       <h2>VideoList</h2>
-      {listItems.map(item => <VideoListItem key={item} data={item} />)}
+      <ul className='list-group'>
+        {videos.map(video =>
+          <VideoListItem
+            selectedVideo={selectedVideo}
+            onVideoClick={onVideoSelect}
+            key={video.etag}
+            video={video}
+          />
+        )}
+      </ul>
     </div>
   );
 }
+
+VideoList.propTypes = {
+  videos: PropTypes.array,
+  onVideoSelect: PropTypes.func
+};
 
 export default VideoList;
