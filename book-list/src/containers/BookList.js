@@ -7,7 +7,7 @@ import { selectBook } from '../actions';
 const BookList = React.createClass({
   renderList() {
     const { books, actions } = this.props;
-    return books.map( book =>
+    return books.map(book =>
       <li
         key={book.id}
         onClick={() => actions.selectBook(book)}

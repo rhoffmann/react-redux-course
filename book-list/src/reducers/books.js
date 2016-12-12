@@ -1,5 +1,7 @@
 import { Types } from '../actions';
 
+import { createReducer } from 'reduxsauce';
+
 const INITIAL_STATE = [
   { id: 1, title: 'Javascript: The Good Parts', pages: 213 },
   { id: 2, title: 'Superhuman', pages: 143 },
@@ -7,11 +9,10 @@ const INITIAL_STATE = [
   { id: 4, title: 'I dont know', pages: 1}
 ];
 
-const booksReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
+const doNothing = (state = INITIAL_STATE, action) => state;
 
-export default booksReducer;
+const ACTION_HANDLERS = {
+  [Types.SELECT_BOOK]: doNothing
+};
+
+export default createReducer(INITIAL_STATE, ACTION_HANDLERS);
