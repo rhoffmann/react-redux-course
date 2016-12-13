@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-import BookList from '../containers/BookList';
-import BookDetail from '../containers/BookDetail';
+class App extends Component {
+  static propTypes = {
+    children: PropTypes.any
+  };
 
-const App = () => {
-  return (
-    <div>
-      <BookList />
-      <BookDetail />
-    </div>
-  );
-};
+  render() {
+    const { children } = this.props;
+    return (
+      <div>
+        App!
+        {children}
+      </div>
+    );
+  }
+}
 
 export default App;
