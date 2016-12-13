@@ -1,10 +1,20 @@
 import { createTypes } from 'reduxsauce';
+import axios from 'axios';
+
+const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
+const API_KEY = '?key=richardhoffmann';
+
+const createApiUrl = (endpoint) => `${ROOT_URL}${endpoint}${API_KEY}`;
 
 export const Types = createTypes(`
-  LOAD_POSTS
+  FETCH_POSTS
 `);
 
-export const loadPosts = (key) => ({
-  type: Types.LOAD_POSTS,
-  payload: key
-});
+export const fetchPosts = (key) => {
+  const request = axios.get(createApiUrl('/posts'));
+
+  return {
+    type: Types.FETCH_POSTS,
+    payload: request
+  };
+}

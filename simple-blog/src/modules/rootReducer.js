@@ -4,6 +4,7 @@ import posts from './posts';
 
 
 const rootReducer = combineReducers({
+  // state: (state = {}) => state
   posts: posts.reducer
 });
 
