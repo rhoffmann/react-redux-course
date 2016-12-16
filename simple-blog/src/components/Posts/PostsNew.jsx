@@ -10,8 +10,9 @@ class PostsNew extends Component {
       pristine,
       reset,
       submitting,
+      values
     } = this.props;
-
+    
     return (
       <form onSubmit={handleSubmit(submitHandler)}>
         <h3>Create new post</h3>

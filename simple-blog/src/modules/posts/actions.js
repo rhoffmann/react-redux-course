@@ -8,7 +8,7 @@ const createApiUrl = (endpoint) => `${ROOT_URL}${endpoint}${API_KEY}`;
 
 export const Types = createTypes(`
   FETCH_POSTS
-  POSTS_CREATE
+  POST_CREATE
 `);
 
 // action creators
@@ -26,7 +26,7 @@ export const createPost = (post) => {
   const request = axios.post(createApiUrl('/posts'), post);
 
   return {
-    type: Types.POSTS_CREATE,
+    type: Types.POST_CREATE,
     payload: request
   }
 }
