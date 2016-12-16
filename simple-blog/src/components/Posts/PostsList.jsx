@@ -21,8 +21,21 @@ export default class PostsList extends Component {
             Add a Post
           </Link>
         </div>
+        <h2>Posts</h2>
         <div>
-          {posts.map(post => <div key={post.id}>{post.id}: {post.title}</div>)}
+          {posts.map(post => {
+            const url = `posts/${post.id}`;
+            return (
+              <li className="list-group-item" key={post.id}>
+                <Link to={url}>
+                  <span className="float-xs-right">
+                    {post.categories}
+                  </span>
+                  <strong>{post.title}</strong>
+                </Link>
+              </li>
+            );
+          })}
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   post: null
 };
 
-const fetchPostsReducer = (state = INITIAL_STATE, action) => {
+const fetchAllPosts = (state = INITIAL_STATE, action) => {
   const { payload } = action;
   if (action.error) {
     console.error(payload.message);
@@ -19,8 +19,25 @@ const fetchPostsReducer = (state = INITIAL_STATE, action) => {
   };
 };
 
+
+const fetchPost = (state = INITIAL_STATE, action) => {
+  const { payload } = action;
+  if (action.error) {
+    return state;
+  }
+  const post = payload.data;
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [ post.id ]: post
+    }
+  };
+};
+
 const ACTION_HANDLERS = {
-  [Types.FETCH_POSTS]: fetchPostsReducer
+  [Types.FETCH_POSTS]: fetchAllPosts,
+  [Types.FETCH_POST]: fetchPost
 };
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS);
