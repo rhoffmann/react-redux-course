@@ -15,19 +15,19 @@ export default class PostsDetail extends Component {
     }
   }
   render() {
-    const { post } = this.props;
+    const { post, deleteCurrentPost } = this.props;
+    if (!post) {
+      return <div>loading...</div>;
+    }
     return (
       <div>
-        <Link to="/" className="btn btn-primary">back</Link>
-        <div>
-          <h2>{ post.title }</h2>
-          <span>
-            {post.categories}
-          </span>
-        </div>
-        <div>
+        <Link to="/">back</Link>
+        <h3>{ post.title }</h3>
+        <h6>Categories: {post.categories}</h6>
+        <p>
           {post.content}
-        </div>
+        </p>
+        <button onClick={deleteCurrentPost} className="btn btn-danger">delete</button>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { compose } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 
 import fromPosts from '../../modules/posts';
 
@@ -12,9 +12,16 @@ const enhance = compose(
     (state, ownProps) => ({
       post: fromPosts.selectors.getPost(state, ownProps.params.id)
     }), {
-      fetchPost: fromPosts.actions.fetchPost
+      fetchPost: fromPosts.actions.fetchPost,
+      deletePost: fromPosts.actions.deletePost
     }
-  )
+  ),
+  withHandlers({
+    deleteCurrentPost: ({ post, deletePost, router }) => async () => {
+      await deletePost(post.id);
+      router.push('/');
+    }
+  })
 );
 
 

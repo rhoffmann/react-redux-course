@@ -9,6 +9,7 @@ const createApiUrl = (endpoint) => `${ROOT_URL}${endpoint}${API_KEY}`;
 export const Types = createTypes(`
   FETCH_POSTS
   FETCH_POST
+  DELETE_POST
   POST_CREATE
 `);
 
@@ -31,6 +32,16 @@ export const fetchPost = (id) => {
     payload: request
   };
 }
+
+export const deletePost = (id) => {
+  const request = axios.delete(createApiUrl(`/posts/${id}`));
+
+  return {
+    type: Types.DELETE_POST,
+    payload: request
+  };
+}
+
 
 export const createPost = (post) => {
   const request = axios.post(createApiUrl('/posts'), post);
