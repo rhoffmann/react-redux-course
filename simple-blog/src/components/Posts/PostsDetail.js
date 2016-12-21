@@ -18,7 +18,7 @@ const enhance = compose(
   ),
   withHandlers({
     deleteCurrentPost: ({ post, deletePost, router }) => async () => {
-      await deletePost(post.id);
+      const result = await deletePost(post.id);
       router.push('/');
     }
   })

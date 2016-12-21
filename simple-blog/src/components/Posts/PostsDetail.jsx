@@ -3,7 +3,8 @@ import { Link } from 'react-router';
 
 export default class PostsDetail extends Component {
   static propTypes = {
-    post: PropTypes.object
+    post: PropTypes.object,
+    deleteCurrentPost: PropTypes.func
   }
   static defaultProps = {
     post: {} // POSTSCHEMA
