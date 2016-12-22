@@ -15,6 +15,9 @@ describe('comments reducer', () => {
       type: Types.COMMENT_SAVE,
       payload: 'new comment'
     };
-    expect(commentReducer([], action)).to.eql(['new comment']);
+
+    expect(commentReducer(['initial comment'], action)).to.eql([
+      'initial comment', 'new comment'
+    ]);
   });
 });

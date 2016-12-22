@@ -17,7 +17,7 @@ export class CommentBox extends Component {
     evt.preventDefault();
 
     this.props.saveComment(this.state.comment);
-
+    
     this.setState({
       comment: ''
     });
