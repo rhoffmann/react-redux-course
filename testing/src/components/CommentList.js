@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-const CommentList = (props) => {
+const CommentList = ({ comments, ...props }) => {
   return (
-    <div className="comment-list">
-      CommentList
-    </div>
+    <ul className="comment-list">
+      {comments.map(comment =>
+        <li key={comment}>{comment}</li>
+      )}
+    </ul>
   );
 };
 
-export default CommentList;
+CommentList.propTypes = {
+  comments: PropTypes.array
+};
+
+CommentList.defaultProps = {
+  comments: []
+};
+
+export default connect(
+  (state) => ({
+    comments: state.comments
+  }),
+  // (dispatch, ownProps) => ({ })
+)(CommentList);
