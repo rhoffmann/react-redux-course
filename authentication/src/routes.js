@@ -2,13 +2,13 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
-import Resources from './components/Resources';
+import SignIn from './components/auth/SignIn';
 
-import requireAuth from './helpers/requireAuth';
+// import requireAuth from './helpers/requireAuth';
 
 const routes = (
   <Route path="/" component={App}>
-    <Route path="resources" component={requireAuth(Resources)} />
+    <Route path="signin" component={SignIn} />
   </Route>
 );
 

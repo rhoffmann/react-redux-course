@@ -7,19 +7,6 @@ import * as actions from '../modules/user/actions';
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.toggleAuth = this.toggleAuth.bind(this);
-  }
-
-  authButton() {
-    return (
-      <button onClick={this.toggleAuth} className="btn btn-primary">
-        {this.props.isAuthenticated ? 'sign out' : 'sign in'}
-      </button>
-    );
-  }
-
-  toggleAuth() {
-    this.props.setAuthenticated(!this.props.isAuthenticated);
   }
 
   render() {
@@ -27,13 +14,7 @@ class Header extends Component {
       <nav className="navbar navbar-light">
         <ul className="nav navbar-nav">
           <li className="nav-item">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/resources">Resources</Link>
-          </li>
-          <li className="nav-item">
-            {this.authButton()}
+            <Link to="/signin">Sign In</Link>
           </li>
         </ul>
       </nav>
