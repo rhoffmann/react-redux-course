@@ -1,7 +1,12 @@
 import React from 'react';
 import cx from 'classnames';
 
-export const renderField = ({ input, label, type, meta: { touched, error, warning, valid } }) => (
+export const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning, valid }
+}) => (
   <div className={cx('form-group', {
       'has-danger': touched && error,
       'has-warning': touched && warning,

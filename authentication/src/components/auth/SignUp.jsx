@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import { renderField } from '../../helpers/form';
 
-const SignIn = React.createClass({
+const SignUp = React.createClass({
   render() {
     const {
       submitHandler,
@@ -18,15 +18,33 @@ const SignIn = React.createClass({
     return (
       <form onSubmit={handleSubmit(submitHandler)}>
         <fieldset>
-          <Field name="email" label="E-Mail" type="email" component={renderField} />
-          <Field name="password" label="Password" type="password" component={renderField} />
+          <Field
+            name="email"
+            label="E-Mail"
+            type="email"
+            component={renderField}
+          />
+          <Field
+            name="password"
+            label="Password"
+            type="password"
+            component={renderField}
+          />
+          <Field
+            name="password_confirm"
+            label="Confirm Password"
+            type="password"
+            component={renderField}
+          />
         </fieldset>
+
         {errorMessage && <div className="alert alert-danger">
           <strong>Oops!</strong> {errorMessage}
         </div>}
+
         <div>
           <button type="submit" disabled={pristine || submitting} className="btn btn-primary">
-            Sign In
+            Sign Up
           </button>
         </div>
       </form>
@@ -34,4 +52,4 @@ const SignIn = React.createClass({
   }
 });
 
-export default SignIn;
+export default SignUp;

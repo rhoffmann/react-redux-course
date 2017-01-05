@@ -6,11 +6,29 @@ import { connect } from 'react-redux';
 
 import fromUser from '../../modules/user';
 
-import SignIn from './SignIn.jsx';
+import SignUp from './SignUp.jsx';
+
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.email) {
+    errors.email = 'Please enter an email';
+  }
+  if (!values.password) {
+    errors.password = 'Please provide a password';
+  }
+  if (values.password !== values.password_confirm) {
+    errors.password_confirm = 'Passwords do not match';
+  }
+
+  return errors;
+};
+
 
 const enhance = compose(
   reduxForm({
-    form: 'SignInForm',
+    form: 'SignUpForm',
+    validate
   }),
   withRouter,
   connect(
@@ -21,19 +39,14 @@ const enhance = compose(
     }),
     // mapDispatchToProps
     {
-      signInUser: fromUser.actions.signInUser
+      signUpUser: fromUser.actions.signUpUser
     }
   ),
   withHandlers({
-    submitHandler: ({ signInUser, router }) => async ({ email, password }) => {
-      try {
-        const token = await signInUser({ email, password });
-        router.push('/features');
-      } catch (e) {
-        console.warn('signIn Failed');
-      };
+    submitHandler: ({ signUpUser, router }) => ({ email, password }) => {
+      signUpUser({ email, password });
     }
   })
 );
 
-export default enhance(SignIn);
+export default enhance(SignUp);
