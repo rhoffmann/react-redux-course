@@ -44,7 +44,9 @@ const enhance = compose(
   ),
   withHandlers({
     submitHandler: ({ signUpUser, router }) => ({ email, password }) => {
-      signUpUser({ email, password });
+      signUpUser({ email, password }).then(() => {
+        router.push('/');
+      });
     }
   })
 );

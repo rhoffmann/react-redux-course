@@ -8,11 +8,13 @@ const INITIAL_STATE = {
 
 const auth = (state = INITIAL_STATE, action) => ({
   ...state,
+  error: false,
   isAuthenticated: true
 });
 
 const unauth = (state = INITIAL_STATE, action) => ({
   ...state,
+  error: false,
   isAuthenticated: false
 });
 

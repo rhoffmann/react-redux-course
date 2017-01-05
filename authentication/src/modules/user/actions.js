@@ -24,7 +24,6 @@ export function authError(error) {
 
 function handleTokenResponse(dispatch) {
   return function(response) {
-    console.log(response);
     const token = response.data.token;
 
     dispatch({ type: Types.USER_AUTH });
@@ -35,15 +34,14 @@ function handleTokenResponse(dispatch) {
 }
 
 // action creators
-export const signInUser = ({ email, password }) =>
-  async (dispatch) => {
-    return api.post('/signin', { email, password })
-      .then(handleTokenResponse(dispatch))
-      .catch(e => {
-        dispatch(authError('Bad Login Info, please try again'));
-        throw e;
-      });
-  };
+export const signInUser = ({ email, password }) => (dispatch) => {
+  return api.post('/signin', { email, password })
+    .then(handleTokenResponse(dispatch))
+    .catch(e => {
+      dispatch(authError('Bad Login Info, please try again'));
+      throw e;
+    });
+};
 
 export const signUpUser = ({ email, password }) => (dispatch) => {
   return api.post('/signup', { email, password })
@@ -51,7 +49,7 @@ export const signUpUser = ({ email, password }) => (dispatch) => {
     .catch(error => {
       const errorMessage = error.response.data.error;
       dispatch(authError(errorMessage));
-      throw error;
+      throw errorMessage;
     });
 };
 

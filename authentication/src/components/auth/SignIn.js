@@ -28,7 +28,7 @@ const enhance = compose(
     submitHandler: ({ signInUser, router }) => async ({ email, password }) => {
       try {
         const token = await signInUser({ email, password });
-        router.push('/features');
+        router.push('/feature');
       } catch (e) {
         console.warn('signIn Failed');
       };

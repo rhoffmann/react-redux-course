@@ -4,6 +4,18 @@ import thunkMiddleware from 'redux-thunk';
 
 import rootReducer from './modules/rootReducer';
 
+import { Types } from './modules/user/actions';
+
+function rehydrateStore(store) {
+  const token = localStorage.getItem('token');
+
+  if (token) {
+    store.dispatch({ type: Types.USER_AUTH });
+  }
+
+  return store;
+}
+
 const middleware = [
   thunkMiddleware,
   promiseMiddleware
@@ -15,5 +27,7 @@ const enhancers = compose(
 )
 
 const store = createStore(rootReducer, enhancers);
+
+rehydrateStore(store);
 
 export default store;
