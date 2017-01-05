@@ -6,15 +6,26 @@ const INITIAL_STATE = {
   isAuthenticated: false
 };
 
-const setAuthenticated = (state = INITIAL_STATE, action) => {
-  return {
-    ...state,
-    isAuthenticated: action.payload
-  };
-};
+const auth = (state = INITIAL_STATE, action) => ({
+  ...state,
+  isAuthenticated: true
+});
+
+const unauth = (state = INITIAL_STATE, action) => ({
+  ...state,
+  isAuthenticated: false
+});
+
+const authError = (state = INITIAL_STATE, action) => ({
+  ...state,
+  error: action.payload
+});
+
 
 const ACTION_HANDLERS = {
-  [Types.CHANGE_AUTH]: setAuthenticated
+  [Types.USER_AUTH]: auth,
+  [Types.USER_UNAUTH]: unauth,
+  [Types.USER_AUTH_ERROR]: authError
 };
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS);
