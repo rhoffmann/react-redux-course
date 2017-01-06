@@ -3,7 +3,8 @@ import { createReducer } from 'reduxsauce';
 import { Types } from './actions';
 
 const INITIAL_STATE = {
-  isAuthenticated: false
+  isAuthenticated: false,
+  serverMessage: false
 };
 
 const auth = (state = INITIAL_STATE, action) => ({
@@ -23,11 +24,16 @@ const authError = (state = INITIAL_STATE, action) => ({
   error: action.payload
 });
 
+const fetchServerMessage = (state = INITIAL_STATE, action) => ({
+  ...state,
+  serverMessage: action.payload
+});
 
 const ACTION_HANDLERS = {
   [Types.USER_AUTH]: auth,
   [Types.USER_UNAUTH]: unauth,
-  [Types.USER_AUTH_ERROR]: authError
+  [Types.USER_AUTH_ERROR]: authError,
+  [Types.FETCH_MESSAGE]: fetchServerMessage
 };
 
 export default createReducer(INITIAL_STATE, ACTION_HANDLERS);

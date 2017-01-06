@@ -8,6 +8,8 @@ export const Types = createTypes(`
   USER_AUTH_ERROR
   USER_UNAUTH
   USER_SIGNUP
+
+  FETCH_MESSAGE
 `);
 
 const api = axios.create({
@@ -15,12 +17,6 @@ const api = axios.create({
   timeout: 2000
 });
 
-export function authError(error) {
-  return {
-    type: Types.USER_AUTH_ERROR,
-    payload: error
-  }
-}
 
 function handleTokenResponse(dispatch) {
   return function(response) {
@@ -33,6 +29,9 @@ function handleTokenResponse(dispatch) {
   }
 }
 
+
+
+
 // action creators
 export const signInUser = ({ email, password }) => (dispatch) => {
   return api.post('/signin', { email, password })
@@ -42,6 +41,7 @@ export const signInUser = ({ email, password }) => (dispatch) => {
       throw e;
     });
 };
+
 
 export const signUpUser = ({ email, password }) => (dispatch) => {
   return api.post('/signup', { email, password })
@@ -53,9 +53,31 @@ export const signUpUser = ({ email, password }) => (dispatch) => {
     });
 };
 
-
+export function authError(error) {
+  return {
+    type: Types.USER_AUTH_ERROR,
+    payload: error
+  }
+}
 
 export const signOutUser = () => {
   localStorage.removeItem('token');
   return { type: Types.USER_UNAUTH };
 };
+
+
+export function fetchMessage() {
+  return function(dispatch) {
+    api.get('/', {
+      headers: {
+        'authorization': localStorage.getItem('token')
+      }
+    })
+      .then(response => {
+        dispatch({
+          type: Types.FETCH_MESSAGE,
+          payload: response.data.message
+        });
+      });
+  }
+}
